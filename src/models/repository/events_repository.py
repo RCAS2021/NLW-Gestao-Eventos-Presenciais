@@ -2,8 +2,10 @@ from typing import Dict
 from src.models.settings.connection import db_connection_handler
 from src.models.entities.events import Events
 from src.models.entities.attendees import Attendees
+from src.errors.error_types.http_conflict import HttpConflictError
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
+
 
 class EventsRepository:
     def insert_event(self, eventsInfo: Dict) -> Dict:
@@ -20,7 +22,7 @@ class EventsRepository:
                 database.session.commit()
                 return eventsInfo
             except IntegrityError:
-                raise Exception("Evento ja cadastrado!")
+                raise HttpConflictError("Evento ja cadastrado!")
             except Exception as exception:
                 database.session.rollback()
                 raise exception
