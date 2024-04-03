@@ -4,13 +4,12 @@ import pytest
 
 db_connection_handler.connect_to_db()
 
-@pytest.mark.skip(reason="Novo registro em banco de dados")
 def test_insert_attendee():
     event_id = "meu-uuid"
     attendeesInfo = {
-        "uuid": "meu_uuid_attendee",
-        "name": "meu name",
-        "email": "email@email.com",
+        "uuid": "meu_uuid_attendee2",
+        "name": "meu name2",
+        "email": "email2@email.com",
         "event_id": event_id
     }
     attendees_repository = AttendeesRepository()
